@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Avengers Merchandise</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
+
+    header {
+      background-color: #1a1a1a;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+
+    #cart {
+      margin-top: 5px;
+      font-size: 1.2em;
+    }
+
+    #product-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .card h2 {
+      font-size: 1.2em;
+      margin: 15px 0 10px;
+    }
+
+    .card p {
+      font-size: 0.95em;
+      color: #555;
+      text-align: center;
+    }
+
+    .card .price {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .card button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #0056b3;
+    }
+
+    #billing-summary {
+      max-width: 600px;
+      margin: 20px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #billing-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    #billing-list li {
+      margin-bottom: 10px;
+    }
+
+    #track-order-section {
+      margin: 20px;
+      text-align: center;
+    }
+
+    #track-order-section input {
+      padding: 10px;
+      font-size: 1em;
+      margin-right: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    #track-order-section button {
+      padding: 10px 15px;
+      font-size: 1em;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #track-order-section button:hover {
+      background-color: #0056b3;
+    }
+
+    #order-status {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: green;
+    }
+
+    #copy-button {
+      padding: 10px 15px;
+      font-size: 1em;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #copy-button:hover {
+      background-color: #218838;
+    }
+    @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+.card button:active {
+  transform: scale(0.95);
+  transition: transform 0.1s;
+}
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card img:hover {
+  transform: scale(1.05);
+}
+@keyframes slideIn {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+header {
+  animation: slideIn 1s ease-out;
+}
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+#cart-count.animate {
+  animation: pop 0.3s ease;
+}
+body {
+  background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.card {
+  perspective: 1000px;
+  transition: transform 0.5s ease;
+}
+.card:hover {
+  transform: rotateY(5deg);
+}
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+button:hover {
+  animation: pulse 0.4s ease-in-out;
+}
+#review-popup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 1000;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1 id="hero-title"></h1>
+    <div id="cart">Cart: <span id="cart-count">0</span></div>
+  </header>
+  <div id="product-grid"></div>
+
+  <div style="text-align: center; padding: 20px;">
+    <h2>Total Amount: $<span id="total-amount">0.00</span></h2>
+    <button onclick="buyNow()" style="background-color: green; padding: 12px 25px; font-size: 1.1em;">Buy Now</button>
+  </div>
+
+  <!-- Billing Summary Section -->
+  <div id="billing-summary">
+    <h3>Billing Summary</h3>
+    <ul id="billing-list"></ul>
+  </div>
+
+  <!-- Track Order Section -->
+  <div id="track-order-section">
+    <h3>Track Your Order</h3>
+    <input type="text" id="order-id-input" placeholder="Enter Order ID">
+    <button onclick="trackOrder()">Track Order</button>
+    <div id="order-status"></div>
+    <button id="copy-button" style="display:none;" onclick="copyToClipboard()">Copy Order ID</button>
+  </div>
+  
+<!-- Review Popup -->
+<div id="review-popup" style="display:none;">
+  <h3 style="margin-top:0;">Leave a Review</h3>
+  <textarea id="review-text" placeholder="Write your review..." style="width:100%;height:80px;padding:10px;border-radius:5px;border:1px solid #ccc;"></textarea><br><br>
+  <button onclick="submitReview()" style="background:#28a745;color:#fff;border:none;padding:10px 15px;border-radius:5px;cursor:pointer;">Submit</button>
+</div>
+
+  <script>
+    const products = [
+      { title: "Iron Man T-Shirt", description: "Red and gold arc reactor design", price: 19.99, image: "https://www.superherotoystore.com/cdn/shop/products/91121030540-1_1600x_2524a575-66cd-465a-b813-f07309a0073d_1200x.png?v=1637817219" },
+      { title: "Captain America Hoodie", description: "Shield logo front and center", price: 29.99, image: "https://www.redwolf.in/image/cache/catalog/hoodies/marvel-captain-america-worthy-hoodie-india-back-600x800.jpg?m=1731052534" },
+      { title: "Thor's Hammer Mug", description: "Mjolnir-shaped handle", price: 14.99, image: "https://homeharbour.in/cdn/shop/files/3DThorMug7_1080x1080.jpg?v=1713010050" },
+      { title: "Black Widow Poster", description: "High-resolution collectible poster", price: 9.99, image: "https://coveritup.com/cdn/shop/products/OfficialMarvelBlackWidowmoviePoster-min_8a90e9ba-1301-456b-af97-fec5589f6fd9.jpg?v=1652265434&width=600" },
+      { title: "Hulk Smash Hat", description: "Green cap with 'SMASH!' text", price: 12.99, image: "https://m.media-amazon.com/images/I/61FugYGQBZL._AC_UY1000_.jpg" },
+      { title: "Avengers Ring Set", description: "6 rings inspired by the Avengers", price: 24.99, image: "https://i.ebayimg.com/images/g/jrUAAOSw3Exg-5oW/s-l1200.webp" }
+    ];
+
+    const productGrid = document.getElementById("product-grid");
+    const cartCountEl = document.getElementById("cart-count");
+    const billingList = document.getElementById("billing-list");
+    const orderStatusEl = document.getElementById("order-status");
+    const copyButton = document.getElementById("copy-button");
+
+    let cartCount = 0;
+    let cart = {};
+    let orders = {}; // Store order details with status
+
+    // Generate product cards
+    products.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.title}" />
+        <h2>${product.title}</h2>
+        <p>${product.description}</p>
+        <div class="price">$${product.price.toFixed(2)}</div>
+        <button onclick="addToCart('${product.title}', ${product.price})">Add to Cart</button>
+      `;
+      productGrid.appendChild(card);
+    });
+
+    // Add product to cart
+    function addToCart(title, price) {
+      cartCount++;
+      cart[title] = cart[title] || { quantity: 0, price: price };
+      cart[title].quantity++;
+
+      cartCountEl.textContent = cartCount;
+
+      let totalAmount = 0;
+      Object.values(cart).forEach(item => {
+        totalAmount += item.quantity * item.price;
+      });
+      document.getElementById("total-amount").textContent = totalAmount.toFixed(2);
+
+      updateBillingSummary();
+    }
+
+    // Update billing summary
+    function updateBillingSummary() {
+      billingList.innerHTML = '';  // Clear the previous billing summary
+
+      let totalAmount = 0;
+      for (const [title, item] of Object.entries(cart)) {
+        const li = document.createElement('li');
+        li.textContent = `${title} (x${item.quantity}) - $${(item.quantity * item.price).toFixed(2)}`;
+        billingList.appendChild(li);
+        totalAmount += item.quantity * item.price;
+      }
+
+      // Update total amount in the billing summary
+      const totalAmountLi = document.createElement('li');
+      totalAmountLi.textContent = `Total: $${totalAmount.toFixed(2)}`;
+      billingList.appendChild(totalAmountLi);
+    }
+
+    // Handle Buy Now action
+    function buyNow() {
+      if (cartCount === 0) {
+        alert("Your cart is empty!");
+      } else {
+        let totalAmount = 0;
+        Object.values(cart).forEach(item => {
+          totalAmount += item.quantity * item.price;
+        });
+
+        // Generate Order ID (random 6-digit number)
+        const orderId = Math.floor(Math.random() * 1000000);
+        orders[orderId] = { status: "Processing" }; // Set initial status
+
+        alert(`Thank you for your purchase of $${totalAmount.toFixed(2)}! Your Order ID is ${orderId}.`);
+
+        // Reset cart
+        cartCount = 0;
+        cart = {};
+        cartCountEl.textContent = cartCount;
+        document.getElementById("total-amount").textContent = "0.00";
+        updateBillingSummary();
+      }
+    }
+
+    // Track order by ID
+    function trackOrder() {
+      const orderId = document.getElementById("order-id-input").value.trim();
+
+      if (orderId && orders[orderId]) {
+        const order = orders[orderId];
+        orderStatusEl.textContent = `Order ID: ${orderId} - Current Status: ${order.status}`;
+        copyButton.style.display = "inline-block"; // Show the Copy button
+      } else {
+        orderStatusEl.textContent = "Order not found. Please check the Order ID.";
+        copyButton.style.display = "none"; // Hide the Copy button
+      }
+    }
+
+    // Copy Order ID to Clipboard
+    function copyToClipboard() {
+      const orderId = document.getElementById("order-id-input").value.trim();
+
+      if (orderId) {
+        navigator.clipboard.writeText(orderId).then(() => {
+          alert("Order ID copied to clipboard!");
+        }).catch(err => {
+          alert("Failed to copy order ID: " + err);
+        });
+      }
+    }
+    let delay = 0;
+products.forEach(product => {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.animationDelay = `${delay}s`; // stagger animations
+  delay += 0.2;
+  card.innerHTML = `
+    <img src="${product.image}" alt="${product.title}" />
+    <h2>${product.title}</h2>
+    <p>${product.description}</p>
+    <div class="price">$${product.price.toFixed(2)}</div>
+    <button onclick="addToCart('${product.title}', ${product.price})">Add to Cart</button>
+  `;
+  productGrid.appendChild(card);
+});
+cartCountEl.classList.add("animate");
+setTimeout(() => cartCountEl.classList.remove("animate"), 300);
+const fadeIns = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+});
+fadeIns.forEach(el => observer.observe(el));
+const text = "Avengers Merchandise";
+let i = 0;
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("hero-title").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 100);
+  }
+}
+window.onload = typeEffect;
+function showReviewPopup() {
+  const reviewPopup = document.getElementById("review-popup");
+  reviewPopup.style.display = "block";
+}
+
+function submitReview() {
+  const reviewText = document.getElementById("review-text").value.trim();
+  if (reviewText) {
+    alert("Thank you for your review!");
+    document.getElementById("review-popup").style.display = "none";
+    document.getElementById("review-text").value = "";
+  } else {
+    alert("Please write a review before submitting.");
+  }
+}
+  </script>
+</body>
+</html>
